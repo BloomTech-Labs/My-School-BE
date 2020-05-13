@@ -10,7 +10,7 @@ const usersRouter = require('../users/users-router.js');
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-server.use('/api/activiteslog', activitylogRouter);
+server.use('/api/activites', activitylogRouter);
 server.use('/api/families', familiesRouter);
 server.use('/api/subjects', subjectsRouter);
 server.use('/api/users', usersRouter);
