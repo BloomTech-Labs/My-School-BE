@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ActivitesDB = require('./activitylog-model.js');
+const ActivitesDB = require('./activities-model.js');
 
 router.get('/', (req,res)=>{
     res.status(200).json({message: 'endpoint working'})
