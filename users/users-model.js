@@ -11,19 +11,19 @@ module.exports = {
 };
 
 function getAllUsers(){
-    return null
+    return db('users')
 };
 
-function getUserById(){
-    return null
+function getUserById(id){
+    return db('users').where({ id }).first()
 };
 
 function getAllSubjectsForUser(){
     return null
 };
 
-function getAllActivitesForUser(){
-    return null 
+function getAllActivitesForUser(id){
+    return db('activities').where({ student_id : id });
 };
 
 function addUser(){
