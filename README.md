@@ -8,37 +8,36 @@
 
 #### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
-
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **yarn install** to install all required dependencies
 - **yarn server** to start the local server
 - **yarn test** to start server using testing environment
 
-### Backend framework goes here
+### Framework : Express
 
 🚫 Why did you choose this framework?
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+-    Allows for rapid implementation
+-    No onboarding time concerns, all members were familiar with Express
+-    Excellent documentation and other sources available
+-    Stable, has been around for a while
 
 ## 2️⃣ Endpoints
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+#### Activities Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
 | GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
 | PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
 | DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+
 
 #### User Routes
 
@@ -53,7 +52,7 @@ To get the server running locally:
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
+Visual data model available [here](https://app.dbdesigner.net/designer/schema/328542)
 
 #### 2️⃣ ORGANIZATIONS
 
