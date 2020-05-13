@@ -6,8 +6,8 @@ exports.up = function (knex) {
     tbl.string("password").notNullable();
     tbl.string("email");
     tbl.string("profile_picture");
-    tbl.integer("family_id").references("id").inTable("families");
-    tbl.integer("user_type_id").references("id").inTable("user_types");
+    tbl.integer("family_id").references("id").inTable("families").onDelete('CASCADE').onUpdate('CASCADE');
+    tbl.integer("user_type_id").references("id").inTable("user_types").onDelete('CASCADE').onUpdate('CASCADE');
   });
 };
 

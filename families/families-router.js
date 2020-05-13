@@ -3,23 +3,71 @@ const router = express.Router();
 const familiesDB = require('./families-model.js');
 
 router.get('/', (req,res)=>{
-    res.status(200).json({message: 'endpoint working'})
+    familiesDB.getAllFamilies()
+    .then(families => {
+        res.status(200).json(families)
+    })
+    .catch(err => {
+        res.status(500).json({errorMessage: 'Internal Server Error', error: err.message})
+    })
 });
 
 router.get('/:id', (req,res)=>{
-    res.status(200).json({message: 'endpoint working'})
+    familiesDB.getFamilyById(req.params.id)
+    .then(family => {
+        if(family){
+            res.status(200).json(family)
+        }
+        else{
+            res.status(404).json({errorMessage: 'No family with that ID'})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({message: 'Internal Server Error', error: err.message})
+    })
 });
 
 router.post('/', (req,res)=>{
-    res.status(201).json({message: 'endpoint working'})
+    if(req.body.name){
+        familiesDB.addFamily(req.body)
+        .then(family => {
+            res.status(201).json(family)
+        })
+        .catch(err => {
+            res.status(500).json({message: 'Internal Server Error', error: err.message})
+        })
+    }
+    else{
+        res.status(400).json({message: 'Families must have a name.'})
+    }
 });
 
 router.put('/:id', (req,res)=>{
-    res.status(200).json({message: 'endpoint working'})
+    familiesDB.editFamily(req.params.id, req.body)
+    .then(family => {
+        if(family){
+            res.status(200).json(family)
+        }else{
+            res.status(404).json({errorMessage: 'No family with that ID'})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({message: 'Internal Server Error', error: err.message})
+    })
 });
 
 router.delete('/:id', (req,res)=>{
-    res.status(200).json({message: 'endpoint working'})
+    familiesDB.deleteFamily(req.params.id)
+    .then(family => {
+        if(family){
+            res.status(200).json({message: 'Family successfully removed'})
+        }else{
+            res.status(404).json({errorMessage: 'No family with that ID'})
+        } 
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    })
 });
 
 module.exports = router; 

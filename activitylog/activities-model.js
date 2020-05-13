@@ -1,6 +1,6 @@
 const db = require('../data/dbconfig.js');
 
-modules.export = {
+module.exports = {
     getAllActivities, 
     getActivityById,
     addActivity,
