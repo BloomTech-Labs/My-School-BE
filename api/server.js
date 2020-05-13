@@ -1,27 +1,19 @@
-//Package imports
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-
-//Route and middleware(s) imports
-const authenticator = require('../auth/authenticator.js');
-
 const server = express();
+const activitylogRouter = require('../activitylog/activities-router.js');
+const familiesRouter = require('../families/families-router.js');
+const subjectsRouter = require('../subjects/subjects-router.js');
+const usersRouter = require('../users/users-router.js');
 
-server.use(cors())
-server.use(helmet())
+server.use(cors());
+server.use(helmet());
 server.use(express.json());
-
-//Protected routes:
-
-
-//Login and registration routes
-
-
-//Sanity Check
-server.get('/', (req, res) => {
-    res.status(200).json({api: `Running properly`})
-})
+server.use('/api/activites', activitylogRouter);
+server.use('/api/families', familiesRouter);
+server.use('/api/subjects', subjectsRouter);
+server.use('/api/users', usersRouter);
 
 module.exports = server;
 
