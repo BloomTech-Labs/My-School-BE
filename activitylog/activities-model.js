@@ -1,6 +1,6 @@
 const db = require('../data/dbconfig.js');
 
-modules.export = {
+module.exports = {
     getAllActivities, 
     getActivityById,
     addActivity,
@@ -9,21 +9,21 @@ modules.export = {
 };
 
 function getAllActivities(){
-    return null
+    return db('activities')
 };
 
-function getActivityById(){
-    return null
+function getActivityById(id){
+    return db('activities').where({ id }).first()
 };
 
-function addActivity(){
-    return null 
+function addActivity(activity){
+    return db('activities').insert(activity, 'id')
 };
 
-function editActivity(){
-    return null
+function editActivity(id, changes){
+    return db('activities').where({ id }).update(changes, 'id')
 };
 
-function deleteActivity(){
-    return null
+function deleteActivity(id){
+    return db('activities').where({ id }).del()
 };
