@@ -27,6 +27,16 @@ router.post('/', verifyBodyForPost,(req,res)=>{
     .catch(err => res.status(500).json({message: 'unexpected error in database when trying to add an activity'}))
 });
 
+//needs to be completed with cloudinary
+router.post('/withimageattached', (req,res) => {
+    res.status(201).json({message: 'activity posted'})
+})
+
+//needs to be completed with cloudinary
+router.put('/addingimage', (req,res)=> {
+    res.status(200).json({message: 'activity image posted'})
+})
+
 router.put('/:id', verifyId, verifyBodyForPut,(req,res)=>{
     const { id } = req.params;
     const activityChanges = req.body;
@@ -62,7 +72,7 @@ function verifyBodyForPost(req,res,next){
 
 function verifyBodyForPut(req,res,next){
     const activity = req.body;
-    Object.entries(activity).length > 0 && activity.name || activity.description
+    Object.entries(activity).length > 0 && activity.name || activity.description || activity.duration || activity.completion_date || activity.subject_id
     ? 
     next() 
     : 
