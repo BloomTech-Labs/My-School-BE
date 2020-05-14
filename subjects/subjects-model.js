@@ -1,6 +1,6 @@
 const db = require('../data/dbconfig.js');
 
-modules.export = {
+module.exports = {
     getAllSubjects, 
     getSubjectById,
     addSubject,
@@ -9,21 +9,33 @@ modules.export = {
 };
 
 function getAllSubjects(){
-    return null
+    return db('subjects')
 };
 
-function getSubjectById(){
-    return null
+function getSubjectById(id){
+    return db('subjects')
+    .first()
+    .where({id})
 };
 
-function addSubject(){
-    return null 
+function addSubject(subject){
+    return db('subjects')
+    .insert(subject)
+    .returning('id')
+    .then(([id]) => {
+        return getSubjectById(id)
+    })
 };
 
-function editSubject(){
-    return null
+function editSubject(id, changes){
+    return db('subjects')
+    .where({id})
+    .update(changes)
+    .then(() => {
+        return getSubjectById(id)
+    })
 };
 
-function deleteSubject(){
-    return null
+function deleteSubject(id){
+    return db('subjects').where({id}).del()
 };
