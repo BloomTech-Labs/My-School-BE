@@ -9,21 +9,33 @@ module.exports = {
 };
 
 function getAllFamilies(){
-    return null
+    return db('families')
 };
 
-function getFamilyById(){
-    return null
+function getFamilyById(id){
+    return db('families')
+    .first()
+    .where({id})
 };
 
-function addFamily(){
-    return null 
+function addFamily(family){
+    return db('families')
+    .insert(family)
+    .returning('id')
+    .then(([id]) => {
+        return getFamilyById(id)
+    })
 };
 
-function editFamily(){
-    return null
+function editFamily(id, changes){
+    return db('families')
+    .where({id})
+    .update(changes)
+    .then(() => {
+        return getFamilyById(id)
+    })
 };
 
-function deleteFamily(){
-    return null
+function deleteFamily(id){
+    return db('families').where({id}).del()
 };
