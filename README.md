@@ -33,7 +33,9 @@ To get the server running locally:
 | GET    | `/activities/`          | TBD            | Returns all activities in the database.      |
 | GET    | `/activities/:id`       | TBD            | Returns the specified activity.              |
 | POST   | `/activities/`          | TBD            | Add a new activity.                          |
+| POST   | `/activities/attachimg` | TBD            | Add a new activity with photo.               |
 | PUT    | `/activities/:id`       | TBD            | Edit an existing activity.                   |
+| PUT    | `/activities/:id/addimg`| TBD            | add a photo to anexisting activity.          |
 | DELETE | `/activities/:id`       | TBD            | Delete an activity.                          |
 
 
@@ -67,6 +69,7 @@ To get the server running locally:
 | GET    | `/users/:id/activities` | TBD            | Returns the activities for the specified user. |
 | POST   | `/users/`               | TBD            | Add a new user.                                |
 | PUT    | `/users/:id`            | TBD            | Edit an existing user.                         |
+| PUT    | `/users/:id/profilepic` | TBD            | Edit an existing user/adding a profile picture |
 | DELETE | `/users/:id`            | TBD            | Delete a user.                                 |
 
 # Data Model

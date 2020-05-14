@@ -6,7 +6,11 @@ const activitylogRouter = require('../activitylog/activities-router.js');
 const familiesRouter = require('../families/families-router.js');
 const subjectsRouter = require('../subjects/subjects-router.js');
 const usersRouter = require('../users/users-router.js');
+const expressFileUpload = require('express-fileupload');
 
+server.use(expressFileUpload({
+  useTempFiles: true
+}));
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
