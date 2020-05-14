@@ -11,29 +11,29 @@ module.exports = {
 };
 
 function getAllUsers(){
-    return null
+    return db('users')
 };
 
-function getUserById(){
-    return null
+function getUserById(id){
+    return db('users').where({ id }).first()
 };
 
-function getAllSubjectsForUser(){
-    return null
+function getAllSubjectsForUser(id){
+    return db('activities').where({ subject_id : id });
 };
 
-function getAllActivitesForUser(){
-    return null 
+function getAllActivitesForUser(id){
+    return db('activities').where({ student_id : id });
 };
 
-function addUser(){
-    return null
+function addUser(user){
+    return db('users').insert(changes).first()
 };
 
-function editUser(){
-    return null
+function editUser(id, changes){
+    return db('users').where({ id }).update(changes);
 };
 
 function deleteUser(){
-    return null
+    return db('activities').where({ id }).del()
 };
