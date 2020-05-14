@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const ActivitesDB = require('./activities-model.js');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: process.env.NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET 
+})
 
 router.get('/', (req,res)=>{
     ActivitesDB.getAllActivities()
@@ -27,14 +34,40 @@ router.post('/', verifyBodyForPost,(req,res)=>{
     .catch(err => res.status(500).json({message: 'unexpected error in database when trying to add an activity'}))
 });
 
-//needs to be completed with cloudinary
-router.post('/withimageattached', (req,res) => {
-    res.status(201).json({message: 'activity posted'})
+router.post('/attachimg', (req,res) => {
+    const file = req.files.photo;
+    cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
+        ActivitesDB.addActivity({
+            ...req.body,
+            photo: results.url
+        })
+        .then(newImage => {
+            ActivitesDB.getActivityById(newImage[0])
+            .then(activity => res.status(201).json(activity))
+            .catch(err => res.status(500).json({message: `unexpected error in database while trying to return the activity with the id of ${newImage[0]}`}))
+        })
+        .catch(err => {
+          res.status(500).json({message: 'unexpected error with database while trying to create add activity'})
+        })
+    })
 })
 
-//needs to be completed with cloudinary
-router.put('/addingimage', (req,res)=> {
-    res.status(200).json({message: 'activity image posted'})
+router.put('/:id/addimg', (req,res)=> {
+    const { id } = req.params;
+    const file = req.files.photo;
+    cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
+        ActivitesDB.editActivity(id,{
+          photo: results.url,
+        })
+        .then(newImage => {
+            ActivitesDB.getActivityById(id)
+            .then(updatedActivity => res.status(201).json(updatedActivity))
+            .catch(err => res.status(500).json({message: `unexpected error in database while trying to return the activity with the id of ${id}`}))
+        })
+        .catch(err => {
+          res.status(500).json({message: `unexpected error with database while tryingt to add an image to the activity with the id of ${id}`})
+        })
+    })
 })
 
 router.put('/:id', verifyId, verifyBodyForPut,(req,res)=>{
