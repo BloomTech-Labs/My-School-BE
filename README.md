@@ -19,55 +19,59 @@ To get the server running locally:
 
 ### Framework : Express
 
-🚫 Why did you choose this framework?
-
 -    Allows for rapid implementation
 -    No onboarding time concerns, all members were familiar with Express
 -    Excellent documentation and other sources available
 -    Stable, has been around for a while
 
-## 2️⃣ Endpoints
-
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+## Endpoints
 
 #### Activities Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/activities/`          | TBD            | Returns all activities in the database.      |
+| GET    | `/activities/:id`       | TBD            | Returns the specified activity.              |
+| POST   | `/activities/`          | TBD            | Add a new activity.                          |
+| PUT    | `/activities/:id`       | TBD            | Edit an existing activity.                   |
+| DELETE | `/activities/:id`       | TBD            | Delete an activity.                          |
 
 
-#### User Routes
+#### Subjects Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/subjects/`            | TBD            | Returns all subjects in the database.        |
+| GET    | `/subjects/:id`         | TBD            | Returns the specified subject.               |
+| POST   | `/subjects/`            | TBD            | Add a new subject.                           |
+| PUT    | `/subjects/:id`         | TBD            | Edit an existing subject.                    |
+| DELETE | `/subjects/:id`         | TBD            | Delete a subject.                            |
+
+#### Families Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/families/`            | TBD            | Returns all families in the database.        |
+| GET    | `/families/:id`         | TBD            | Returns the specified family.                |
+| POST   | `/families/`            | TBD            | Add a new family.                            |
+| PUT    | `/families/:id`         | TBD            | Edit an existing family.                     |
+| DELETE | `/families/:id`         | TBD            | Delete a family.                             |
+
+#### Users Routes
+
+| Method | Endpoint                | Access Control | Description                                    |
+| ------ | ----------------------- | -------------- | ---------------------------------------------- |
+| GET    | `/users/`               | TBD            | Returns all users in the database              |
+| GET    | `/users/:id`            | TBD            | Returns the specified user.                    |
+| GET    | `/users/:id/subjects`   | TBD            | Returns all subjects for the specified user    |
+| GET    | `/users/:id/activities` | TBD            | Returns the activities for the specified user. |
+| POST   | `/users/`               | TBD            | Add a new user.                                |
+| PUT    | `/users/:id`            | TBD            | Edit an existing user.                         |
+| DELETE | `/users/:id`            | TBD            | Delete a user.                                 |
 
 # Data Model
 
 Visual data model available [here](https://app.dbdesigner.net/designer/schema/328542)
-
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
 
 #### USERS
 
@@ -75,45 +79,106 @@ Visual data model available [here](https://app.dbdesigner.net/designer/schema/32
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
+  id: INTEGER
+  name: STRING
+  username: STRING
+  password: STRING
   email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  profile_picture: STRING
+  family_id: INTEGER foreign key in FAMILIES table
+  user_type_id: INTEGER foreign key in USER_TYPES table
 }
 ```
 
-## 2️⃣ Actions
+#### FAMILIES
+
+---
+
+```
+{
+  id: INTEGER
+  name: STRING
+}
+```
+
+#### USER TYPES
+
+---
+
+```
+{
+  id: INTEGER
+  name: STRING
+}
+```
+
+#### SUBJECTS
+
+---
+
+```
+{
+  id: INTEGER
+  name: STRING
+}
+```
+
+#### ACTIVITY TYPES
+
+---
+
+```
+{
+  id: INTEGER
+  name: STRING
+}
+```
+
+
+#### ACTIVITIES
+
+---
+
+```
+{
+  id: INTEGER
+  name: STRING
+  description: STRING
+  photo: STRING
+  created_at: TIMESTAMP
+  duration: DECIMAL
+  completion_date: TIMESTAMP
+  student_id: INTEGER foreign key in USERS table
+  subject_id: INTEGER foreign key in SUBJECTS table
+  activity_type_id: INTEGER foreign key in ACTIVITY_TYPES table
+}
+```
+
+## Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+`getAllSubjects()` -> Returns all subjects
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`getSubjectById(id)` -> Returns a single subject by ID
 
-`addOrg(org)` -> Returns the created org
+`addSubject(subject)` -> Returns the created subject
 
-`updateOrg(orgId)` -> Update an organization by ID
+`editSubject(id, changes)` -> Update an subject by ID
 
-`deleteOrg(orgId)` -> Delete an organization by ID
+`deleteSubject(id)` -> Delete an subject by ID
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
+`getAllFamilies()` -> Returns all families
 
-`getUser(userId)` -> Returns a single user by user ID
+`getFamilyById(id)` -> Returns a single family by ID
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`addFamily(family)` -> Returns the created family
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`editFamily(id, changes)` -> Update a family by ID
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`deleteFamily(id)` -> Delete an family by ID
 
 ## 3️⃣ Environment Variables
 
@@ -167,5 +232,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/My-School-FE/blob/master/README.md) for details on the fronend of our project.
