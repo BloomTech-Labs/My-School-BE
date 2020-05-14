@@ -38,22 +38,27 @@ router.post('/', (req,res)=>{
         })
     }
     else{
-        res.status(400).json({message: 'Families must have a name.'})
+        res.status(400).json({errorMessage: 'Families must have a name.'})
     }
 });
 
 router.put('/:id', (req,res)=>{
-    familiesDB.editFamily(req.params.id, req.body)
-    .then(family => {
-        if(family){
-            res.status(200).json(family)
-        }else{
-            res.status(404).json({errorMessage: 'No family with that ID'})
-        }
-    })
-    .catch(err => {
-        res.status(500).json({message: 'Internal Server Error', error: err.message})
-    })
+    if(req.body.name){
+        familiesDB.editFamily(req.params.id, req.body)
+        .then(family => {
+            if(family){
+                res.status(200).json(family)
+            }else{
+                res.status(404).json({errorMessage: 'No family with that ID'})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({message: 'Internal Server Error', error: err.message})
+        })
+    }else{
+        res.status(400).json({errorMessage: "You have not made any changes."})
+    }
+
 });
 
 router.delete('/:id', (req,res)=>{
