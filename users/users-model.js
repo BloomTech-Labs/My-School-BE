@@ -10,10 +10,17 @@ module.exports = {
 
 function getAllUsers(){
     return db('users')
+    .join('families','users.family_id','families.id')
+    .join('user_types','users.user_type_id',"user_types.id")
+    .select('users.*','families.name as familyName','user_types.name as userType');
 };
 
 function getUserById(id){
-    return db('users').where({ id }).first()
+    return db('users')
+    .join('families','users.family_id','families.id')
+    .join('user_types','users.user_type_id',"user_types.id")
+    .select('users.*','families.name as familyName','user_types.name as userType')
+    .where('users.id','=',id).first();
 };
 
 function getAllActivitesForUser(id){
