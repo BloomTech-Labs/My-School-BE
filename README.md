@@ -1,9 +1,3 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 # API Documentation
 
 #### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
@@ -13,9 +7,9 @@
 To get the server running locally:
 
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm run server** to start the local server
+- **npm run test** to start server using testing environment
 
 ### Framework : Express
 
@@ -65,7 +59,7 @@ To get the server running locally:
 | ------ | ----------------------- | -------------- | ---------------------------------------------- |
 | GET    | `/users/`               | TBD            | Returns all users in the database              |
 | GET    | `/users/:id`            | TBD            | Returns the specified user.                    |
-| GET    | `/users/:id/subjects`   | TBD            | Returns all subjects for the specified user    |
+| GET    | `/users/:id/subjects`   | TBD            | Returns all subjects for the specified user.   |
 | GET    | `/users/:id/activities` | TBD            | Returns the activities for the specified user. |
 | POST   | `/users/`               | TBD            | Add a new user.                                |
 | PUT    | `/users/:id`            | TBD            | Edit an existing user.                         |
@@ -159,8 +153,6 @@ Visual data model available [here](https://app.dbdesigner.net/designer/schema/32
 
 ## Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
-
 `getAllSubjects()` -> Returns all subjects
 
 `getSubjectById(id)` -> Returns a single subject by ID
@@ -182,20 +174,47 @@ Visual data model available [here](https://app.dbdesigner.net/designer/schema/32
 `editFamily(id, changes)` -> Update a family by ID
 
 `deleteFamily(id)` -> Delete an family by ID
+<br>
+<br>
+<br>
+`getAllUsers()` -> Returns all users
 
-## 3️⃣ Environment Variables
+`getUserById(id)` -> Returns a single user by ID
+
+`addUser(user)` -> Returns the created user
+
+`editUser(id, changes)` -> Update a user by ID
+
+`deleteUser(id)` -> Delete an user by ID
+
+`getAllSubjectsForUser(id)` -> Returns all activities matching the subject ID
+
+`getAllActivitiesForUser(id)` -> Returns all activities matching the student ID
+<br>
+<br>
+<br>
+`getAllActivities()` -> Returns all activities
+
+`getActivityById(id)` -> Returns a single activity by ID
+
+`addActivity(activity)` -> Returns the created activity
+
+`editActivity(id, changes)` -> Update a activity by ID
+
+`deleteActivity(id)` -> Delete an activity by ID
+
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
+    *  PORT - set to any valid local port number for running server locally
+    *  DB_ENV - set to "development" until ready for "production"
     *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
+    *  CLOUDINARY_NAME - this is your Cloudinary username
+    *  CLOUDINARY_API_KEY - this is generated in your Cloudinary account
+    *  CLOUDINARY_API_SECRET - this is generated in your Cloudinary account
     
 ## Contributing
 
