@@ -40,7 +40,6 @@ router.put('/:id/profilepic', verifyId, (req,res)=>{
     const { id } = req.params;
     const file = req.files.photo;
     cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
-        console.log('results',results)
         UsersDB.editUser(id,{
           profile_picture: results.url,
         })

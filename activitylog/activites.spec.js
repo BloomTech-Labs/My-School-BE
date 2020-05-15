@@ -1,8 +1,10 @@
+require('dotenv').config()
 const request = require('supertest');
 const db = require('../data/dbconfig.js');
 const server = require('../api/server.js');
 const knex = require('../data/dbconfig.js');
 const ActDB = require('./activities-model.js')
+const testImage = `${__dirname}/../utils/test-helpers/testPost.png`
 
 describe('activites endpoints', ()=> {
     beforeAll(() => {
@@ -54,40 +56,40 @@ describe('activites endpoints', ()=> {
             })
         })
     })
-    // describe('POST /attachimg', () => {
-    //     it('should return a status of 201 if the name is created', () => {
-    //         return request(server).post('/api/activites').send({name: 'Smith'})
-    //         .then(res => {
-    //             expect(res.status).toBe(201)
-    //         })
-    //     })
-    //     it('should return the newly created name for the activity', () => {
-    //         return request(server).post('/api/activites').send({name: 'Smith'})
-    //         .then(res => {
-    //             expect(res.body).toEqual(
-    //                 expect.objectContaining({
-    //                     name: "Smith"
-    //                 })
-    //             )
-    //         })
-    //     })
-    // })
-    //     // describe('PUT /:id/addimg', () => {
-//     //     it("should return a 200 status", () => {
-//     //         return request(server).put('/api/users/1/profilepic')
-//     //         .send({file: '../wherevertheimageis.jpeg'})
-//     //         .then(res => {
-//     //             expect(res.status).toBe(200)
-//     //         })
-//     //     })
-//     //     it("should the user info back with the image URL", () => {
-//     //         return request(server).put('/api/users/1/profilepic')
-//     //         .send({file: '../wherevertheimageis.jpeg'})
-//     //         .then(res => {
-//     //             expect(res.body).toBeTruthy()
-//     //         })
-//     //     })
-//     // })
+    describe('POST /attachimg', () => {
+        it('should return a status of 201 if the name is created', () => {
+            return request(server).post('/api/activites').send({name: 'Smith'})
+            .then(res => {
+                expect(res.status).toBe(201)
+            })
+        })
+        it('should return the newly created name for the activity', () => {
+            return request(server).post('/api/activites').send({name: 'Smith'})
+            .then(res => {
+                expect(res.body).toEqual(
+                    expect.objectContaining({
+                        name: "Smith"
+                    })
+                )
+            })
+        })
+    })
+        describe('PUT /:id/addimg', () => {
+        it("should return a 200 status", () => {
+            return request(server).put('/api/users/1/profilepic')
+            .attach('photo', testImage)
+            .then(res => {
+                expect(res.status).toBe(201)
+            })
+        })
+        it("should the user info back with the image URL", () => {
+            return request(server).put('/api/users/1/profilepic')
+            .attach('photo', testImage)
+            .then(res => {
+                expect(res.body).toBeTruthy()
+            })
+        })
+    })
     describe('PUT /:id', () => {
         it("should return a 200 status", () => {
             return request(server).put('/api/activites/1')
