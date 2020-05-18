@@ -23,12 +23,10 @@ router.post('/', verifyBodyForPost,(req,res)=>{
     const activity = req.body;
     ActivitesDB.addActivity(activity)
     .then(activityId => {
-        console.log(activityId[0])
         activityId 
         ? 
         ActivitesDB.getActivityById(activityId[0])
         .then(activity => {
-            console.log(activity)
             res.status(201).json(activity)
         })
         .catch(err => res.status(500).json({message: 'unexpected error in database when trying to get activity by id'}))
