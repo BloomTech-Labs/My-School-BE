@@ -23,10 +23,14 @@ router.post('/', verifyBodyForPost,(req,res)=>{
     const activity = req.body;
     ActivitesDB.addActivity(activity)
     .then(activityId => {
+        console.log(activityId[0])
         activityId 
         ? 
         ActivitesDB.getActivityById(activityId[0])
-        .then(activity => res.status(201).json(activity))
+        .then(activity => {
+            console.log(activity)
+            res.status(201).json(activity)
+        })
         .catch(err => res.status(500).json({message: 'unexpected error in database when trying to get activity by id'}))
         :
         res.status(400).json({message: 'activity was not created'})
@@ -95,7 +99,7 @@ function verifyId(req,res,next){
         req.activity = activity;
         activity ? next() : res.status(401).json({message: `there is no record of an activity with the id of ${id}`})
     })
-    .catch(err => res.status(500).json({message: `unexpected error in database when trying to the activity with the id of ${id}`}))
+    .catch(err => res.status(500).json({message: `unexpected error in database when trying to the activity with the id of ${id}`, err: err.message}))
 };
 
 function verifyBodyForPost(req,res,next){
