@@ -24,7 +24,12 @@ function getUserById(id){
 };
 
 function getAllActivitesForUser(id){
-    return db('activities').where({ student_id : id });
+    return db('activities')
+    .join('subjects','activities.subject_id','subjects.id')
+    .join('users','activities.student_id','users.id')
+    .join('activity_types','activities.activity_type_id','activity_types.id')
+    .select('activities.*','users.name as studentsName','subjects.name as subject','activity_types.name as activityType')
+    .where('student_id','=',id);
 };
 
 function editUser(id, changes){
