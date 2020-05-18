@@ -20,9 +20,10 @@ router.get('/:id', verifyId, (req,res)=>{
 });
 
 router.get('/:id/activities', verifyId, (req,res)=>{
-    UsersDB.getAllActivitesForUser(req.user.id)
+    const { id } = req.params;
+    UsersDB.getAllActivitesForUser(id)
     .then(activites => res.status(200).json(activites))
-    .catch(err => res.status(400).json({message: `couldn't locate any activites for the user with an id of ${req.user.id}`}))
+    .catch(err => res.status(400).json({err: err ,message: `couldn't locate any activites for the user with an id of ${id}`}))
 });
 
 router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
