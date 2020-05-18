@@ -13,6 +13,7 @@ exports.seed = function (knex) {
         { name: "Music" },
         { name: "Health" },
         { name: "Physical Education" },
+        { name: "Other"}
       ]);
     });
 };

@@ -6,19 +6,19 @@ const knex = require('../data/dbconfig.js');
 const ActDB = require('./activities-model.js')
 const testImage = `${__dirname}/../utils/test-helpers/testPost.png`
 
-describe('activites endpoints', ()=> {
+describe('activities endpoints', ()=> {
     beforeAll(() => {
         return knex.seed.run()
     })
     describe('GET /', () => {
         it("should return a 200 status", () => {
-            return request(server).get('/api/activites')
+            return request(server).get('/api/activities')
             .then(res => {
                 expect(res.status).toBe(200)
             })
         })
-        it("should return a list of activites", () => {
-            return request(server).get('/api/activites')
+        it("should return a list of activities", () => {
+            return request(server).get('/api/activities')
             .then(res => {
                 expect(res.body).toBeTruthy()
             })
@@ -26,13 +26,13 @@ describe('activites endpoints', ()=> {
     })
     describe('GET /:id', () => {
         it("should return a 200 status", () => {
-            return request(server).get('/api/activites/1')
+            return request(server).get('/api/activities/1')
             .then(res => {
                 expect(res.status).toBe(200)
             })
         })
         it("should return a single activity based on the id passed in parameter", () => {
-            return request(server).get('/api/activites/1')
+            return request(server).get('/api/activities/1')
             .then(res => {
                 expect(res.body).toBeTruthy()
             })
@@ -40,13 +40,13 @@ describe('activites endpoints', ()=> {
     })
     describe('POST /', () => {
         it('should return a status of 201 if the name is created', () => {
-            return request(server).post('/api/activites').send({name: 'Smith'})
+            return request(server).post('/api/activities').send({name: 'Smith'})
             .then(res => {
                 expect(res.status).toBe(201)
             })
         })
         it('should return the newly created name for the activity', () => {
-            return request(server).post('/api/activites').send({name: 'Smith'})
+            return request(server).post('/api/activities').send({name: 'Smith'})
             .then(res => {
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -58,13 +58,13 @@ describe('activites endpoints', ()=> {
     })
     describe('POST /attachimg', () => {
         it('should return a status of 201 if the name is created', () => {
-            return request(server).post('/api/activites').send({name: 'Smith'})
+            return request(server).post('/api/activities').send({name: 'Smith'})
             .then(res => {
                 expect(res.status).toBe(201)
             })
         })
         it('should return the newly created name for the activity', () => {
-            return request(server).post('/api/activites').send({name: 'Smith'})
+            return request(server).post('/api/activities').send({name: 'Smith'})
             .then(res => {
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -92,7 +92,7 @@ describe('activites endpoints', ()=> {
     })
     describe('PUT /:id', () => {
         it("should return a 200 status", () => {
-            return request(server).put('/api/activites/1')
+            return request(server).put('/api/activities/1')
             .send( { 
                 name: 'dylan'
             })
@@ -101,7 +101,7 @@ describe('activites endpoints', ()=> {
             })
         })
         it("should return the activity with updated changes", () => {
-            return request(server).get('/api/activites/1')
+            return request(server).get('/api/activities/1')
             .then(res => {
                 expect(res.body).toBeTruthy()
             })
@@ -109,13 +109,13 @@ describe('activites endpoints', ()=> {
     })
     describe('DELETE /:id', () => {
         it("should return a 200 status", () => {
-            return request(server).delete('/api/activites/1')
+            return request(server).delete('/api/activities/1')
             .then(res => {
                 expect(res.status).toBe(200)
             })
         })
         it("should return a truthy message saying activity was deleted", () => {
-            return request(server).delete('/api/activites/1')
+            return request(server).delete('/api/activities/1')
             .then(res => {
                 expect(res.body).toBeTruthy()
             })

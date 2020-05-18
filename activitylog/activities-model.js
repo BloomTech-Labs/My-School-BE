@@ -14,6 +14,7 @@ function getAllActivities(){
     .join('users','activities.student_id','users.id')
     .join('activity_types','activities.activity_type_id','activity_types.id')
     .select('activities.*','users.name as studentsName','subjects.name as subject','activity_types.name as activityType');
+    // return db('activities')
 };
 
 function getActivityById(id){
@@ -23,11 +24,18 @@ function getActivityById(id){
     .join('activity_types','activities.activity_type_id','activity_types.id')
     .select('activities.*','users.name as studentsName','subjects.name as subject','activity_types.name as activityType')
     .where('activities.id','=', id )
-    .first();
+    // .where('id','=', id)
+    // .first();
 };
 
+// function getActivityById(id){
+//     return db('activities')
+//     .where({id})
+// }
+
 function addActivity(activity){
-    return db('activities').insert(activity, 'id')
+    // return db('activities').insert(activity, 'id')
+    return db('activities').insert(activity).returning('id')
 };
 
 function editActivity(id, changes){

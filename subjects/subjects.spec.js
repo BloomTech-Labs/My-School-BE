@@ -12,6 +12,7 @@ describe('subjects endpoint', () => {
         it("should return 200 as a status", () => {
             return request(server).get('/api/subjects')
             .then(res => {
+                console.log(res.data)
                 expect(res.status).toBe(200)
             })
         })
@@ -30,7 +31,7 @@ describe('subjects endpoint', () => {
             })
         })
         it("should return a subject object if the subject exists", () => {
-            return request(server).get('/api/subjects/1')
+            return request(server).get('/api/subjects/345')
             .then(res => {
                 expect(res.body).toEqual(
                     expect.objectContaining({

@@ -8,6 +8,7 @@ exports.seed = function (knex) {
         { name: "Independent Study" },
         { name: "Field Trip" },
         { name: "Research and Report" },
+        { name: "Other" }
       ]);
     });
 };
