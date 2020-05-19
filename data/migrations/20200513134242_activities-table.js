@@ -8,8 +8,8 @@ exports.up = function (knex) {
     tbl.decimal("duration");
     tbl.timestamp("completion_date").defaultTo(knex.fn.now());
     tbl.integer("student_id").references("id").inTable("users").onDelete('CASCADE').onUpdate('CASCADE');
-    tbl.integer("subject_id").defaultTo(9).references("id").inTable("subjects").onDelete('CASCADE').onUpdate('CASCADE');
-    tbl.integer("activity_type_id").defaultTo(4).references("id").inTable("activity_types").onDelete('CASCADE').onUpdate('CASCADE');
+    tbl.integer("subject_id").references("id").inTable("subjects").onDelete('CASCADE').onUpdate('CASCADE');
+    tbl.integer("activity_type_id").references("id").inTable("activity_types").onDelete('CASCADE').onUpdate('CASCADE');
   });
 };
 
