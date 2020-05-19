@@ -85,7 +85,7 @@ router.put('/:id', verifyId, verifyBodyForPut,(req,res)=>{
 });
 
 router.delete('/:id', verifyId,(req,res)=>{
-    ActivitesDB.deleteActivity(req.activity.id)
+    ActivitesDB.deleteActivity(req.params.id)
     .then(number => res.status(200).json(req.activity))
     .catch(err => res.status(500).json({message: `unexpected error in database when trying to delete the activity with the id of ${req.activity.id}`}))
 });
