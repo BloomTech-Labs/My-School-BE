@@ -57,7 +57,7 @@ router.post('/attachimg', (req,res) => {
 router.put('/:id/addimg', (req,res)=> {
     const { id } = req.params;
     console.log(req.body)
-    const file = req.files.photo;
+    const file = req.body.photo.files.photo;
     cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
         ActivitesDB.editActivity(id,{
             ...req.body,
