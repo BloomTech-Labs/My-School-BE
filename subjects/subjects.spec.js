@@ -31,7 +31,7 @@ describe('subjects endpoint', () => {
             })
         })
         it("should return a subject object if the subject exists", () => {
-            return request(server).get('/api/subjects/345')
+            return request(server).get('/api/subjects/1')
             .then(res => {
                 expect(res.body).toEqual(
                     expect.objectContaining({
@@ -188,7 +188,7 @@ describe('subjects model', () => {
         it('should return all subjects in the database', () => {
             return subjectsDB.getAllSubjects()
             .then(res => {
-                expect(res).toHaveLength(8)
+                expect(res).toHaveLength(9)
             })
         })
     })
@@ -208,7 +208,7 @@ describe('subjects model', () => {
         it('should add the subject to the database', async () => {
             await subjectsDB.addSubject({name: 'ANewSubject'})
             const subjects = await db('subjects')
-            expect(subjects).toHaveLength(9)
+            expect(subjects).toHaveLength(10)
         })
     })
     describe('editSubject()', () => {
