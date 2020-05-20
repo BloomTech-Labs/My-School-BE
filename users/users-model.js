@@ -10,24 +10,24 @@ module.exports = {
 
 function getAllUsers(){
     return db('users')
-    .join('families','users.family_id','families.id')
-    .join('user_types','users.user_type_id',"user_types.id")
+    .leftJoin('families','users.family_id','families.id')
+    .leftJoin('user_types','users.user_type_id',"user_types.id")
     .select('users.*','families.name as familyName','user_types.name as userType');
 };
 
 function getUserById(id){
     return db('users')
-    .join('families','users.family_id','families.id')
-    .join('user_types','users.user_type_id',"user_types.id")
+    .leftJoin('families','users.family_id','families.id')
+    .leftJoin('user_types','users.user_type_id',"user_types.id")
     .select('users.*','families.name as familyName','user_types.name as userType')
     .where('users.id','=',id).first();
 };
 
 function getAllActivitesForUser(id){
     return db('activities')
-    .join('subjects','activities.subject_id','subjects.id')
-    .join('users','activities.student_id','users.id')
-    .join('activity_types','activities.activity_type_id','activity_types.id')
+    .leftJoin('subjects','activities.subject_id','subjects.id')
+    .leftJoin('users','activities.student_id','users.id')
+    .leftJoin('activity_types','activities.activity_type_id','activity_types.id')
     .select('activities.*','users.name as studentsName','subjects.name as subject','activity_types.name as activityType')
     .where('student_id','=',id);
 };
