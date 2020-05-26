@@ -105,4 +105,4 @@ dist
 .tern-port
 
 # DB Files
-.db3
+website.db3
