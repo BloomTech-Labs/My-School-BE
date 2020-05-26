@@ -72,7 +72,7 @@ To get the server running locally:
 
 # Data Model
 
-[DataModel](https://i.imgur.com/0pD2oZF.png)
+![DataModel](https://i.imgur.com/0pD2oZF.png)
 
 Visual data model available [here](https://app.dbdesigner.net/designer/schema/328542)
 
