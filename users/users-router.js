@@ -57,7 +57,6 @@ router.put('/:id/profilepic', verifyId, (req,res)=>{
 
 router.delete('/:id', verifyId, (req,res)=>{
     const { id } = req.params;
-    console.log(id)
     UsersDB.deleteUser(id)
     .then(number => 
         number > 0 
