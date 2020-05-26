@@ -1,5 +1,6 @@
 # API Documentation
 
+![Test Coverage](https://api.codeclimate.com/v1/badges/b1dbebbcb22c94494974/test_coverage)
 #### Backend delpoyed at [Heroku](https://my-school-v1.herokuapp.com/) <br>
 
 ## Getting started
