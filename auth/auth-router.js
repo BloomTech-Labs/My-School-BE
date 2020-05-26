@@ -1,19 +1,21 @@
-//Package imports
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-//Utility imports
 const generateToken = require('../utils/generateToken.js');
+const Users = require('../users/users-model.js')
 
-//Registration Endpoint
-router.post('/registration-endpoint', (req, res) => {
+router.post('/registration', (req, res) => {
   const user = req.body;
-  
-  //Salt password
   const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash;
-
+  Users.addUser(user)
+  .then((user) => {
+    const token = generateToken(user);
+    res.status(201).json({user, token})
+  })
+  .catch((err) => {
+    res.status(500).json({errorMessage: err.message})
+  })
 });
 
 //Login Endpoint
