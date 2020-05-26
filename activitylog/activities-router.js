@@ -9,6 +9,8 @@ cloudinary.config({
   api_secret: process.env.API_SECRET 
 })
 
+console.log(process.env.API_KEY)
+
 router.get('/', (req,res)=>{
     ActivitesDB.getAllActivities()
     .then(activites => res.status(200).json(activites))
@@ -68,6 +70,7 @@ router.put('/:id/addimg', (req,res)=> {
             .catch(err => res.status(500).json({message: `unexpected error in database while trying to return the activity with the id of ${id}`}))
         })
         .catch(err => {
+            console.log('LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK', err)
           res.status(500).json({message: `unexpected error with database while tryingt to add an image to the activity with the id of ${id}`})
         })
     })

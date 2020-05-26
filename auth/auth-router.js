@@ -19,7 +19,9 @@ router.post('/registration', (req, res) => {
 });
 
 //Login Endpoint
-router.post('/login-endpoint', (req, res) => {
+router.post('/login', (req, res) => {
+  const {username, password} = req.body;
+  Users.getUserById()
 
 });
 
