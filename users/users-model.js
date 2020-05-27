@@ -6,7 +6,8 @@ module.exports = {
   getUserById,
   editUser,
   deleteUser,
-  addUser
+  addUser,
+  getUserBy
 };
 
 function getAllUsers() {
@@ -66,4 +67,8 @@ function addUser(user) {
     .then(([id]) => {
       return getUserById(id);
     });
+}
+
+function getUserBy(filter){
+  return db('users').first().where(filter)
 }
