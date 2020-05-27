@@ -24,6 +24,12 @@ To get the server running locally:
 
 ## Endpoints
 
+#### Monitoring
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/`                     | TBD            | Returns a message indicating server is up    |
+
 #### Activities Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
