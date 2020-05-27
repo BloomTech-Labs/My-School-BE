@@ -6,7 +6,7 @@ module.exports = {
   getUserById,
   editUser,
   deleteUser,
-  addUser,
+  addUser
 };
 
 function getAllUsers() {

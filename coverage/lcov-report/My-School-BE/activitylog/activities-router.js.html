@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">71.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/57</span>
+                <span class='fraction'>42/59</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.06% </span>
+                <span class="strong">55.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>16/34</span>
+                <span class='fraction'>19/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">71.19% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/57</span>
+                <span class='fraction'>42/59</span>
             </div>
         
             
@@ -174,7 +174,10 @@
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -184,6 +187,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -234,16 +239,17 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,6 +308,8 @@ cloudinary.config({
   api_secret: process.env.API_SECRET 
 })
 &nbsp;
+console.log(process.env.API_KEY)
+&nbsp;
 router.get('/', (req,res)=&gt;{
     ActivitesDB.getAllActivities()
     .then(activites =&gt; res.status(200).json(activites))
@@ -350,17 +358,18 @@ router.post('/attachimg', <span class="fstat-no" title="function not covered" >(
 router.put('/:id/addimg', (req,res)=&gt; {
     const { id } = req.params;
     const file = req.files.photo;
-    cloudinary.uploader.upload(file.tempFilePath, <span class="fstat-no" title="function not covered" >(e</span>rr,results)=&gt;{
-<span class="cstat-no" title="statement not covered" >        ActivitesDB.editActivity(id,{</span>
+    cloudinary.uploader.upload(file.tempFilePath, (err,results)=&gt;{
+        ActivitesDB.editActivity(id,{
             ...req.body,
             photo: results.url,
         })
-        .then(<span class="fstat-no" title="function not covered" >ne</span>wImage =&gt; {
-<span class="cstat-no" title="statement not covered" >            ActivitesDB.getActivityById(id)</span>
-            .then(<span class="fstat-no" title="function not covered" >up</span>datedActivity =&gt; <span class="cstat-no" title="statement not covered" >res.status(201).json(updatedActivity))</span>
+        .then(newImage =&gt; {
+            ActivitesDB.getActivityById(id)
+            .then(updatedActivity =&gt; res.status(201).json(updatedActivity))
             .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; <span class="cstat-no" title="statement not covered" >res.status(500).json({message: `unexpected error in database while trying to return the activity with the id of ${id}`}))</span>
         })
         .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >            console.log('LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK', err)</span>
 <span class="cstat-no" title="statement not covered" >          res.status(500).json({message: `unexpected error with database while tryingt to add an image to the activity with the id of ${id}`})</span>
         })
     })
@@ -415,7 +424,7 @@ module.exports = router; </pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue May 26 2020 17:25:48 GMT-0400 (Eastern Daylight Time)
+                at Tue May 26 2020 19:28:15 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
