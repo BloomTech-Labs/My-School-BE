@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const generateToken = require('../utils/generateToken.js');
 const Users = require('../users/users-model.js')
 
@@ -18,11 +17,21 @@ router.post('/registration', (req, res) => {
   })
 });
 
-//Login Endpoint
+// Login Endpoint
 router.post('/login', (req, res) => {
   const {username, password} = req.body;
-  Users.getUserById()
-
+  Users.getUserBy({username})
+  .then(user => {
+    if(user && bcrypt.compareSync(password, user.password)){
+      const token = generateToken(user);
+      res.status(202).json({user, token})
+    }else{
+      res.status(401).json({message: "Authentication Failed"})
+    }
+  })
+  .catch(err => {
+    res.status(500).json({message: err.message})
+  })
 });
 
 
