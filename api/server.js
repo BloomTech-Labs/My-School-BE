@@ -19,5 +19,9 @@ server.use('/api/families', familiesRouter);
 server.use('/api/subjects', subjectsRouter);
 server.use('/api/users', usersRouter);
 
+server.get("/", (req, res) => {
+  res.status(200).json({api: "api server is up and running"})
+})
+
 module.exports = server;
 
