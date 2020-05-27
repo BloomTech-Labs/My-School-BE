@@ -12,7 +12,6 @@ describe('subjects endpoint', () => {
         it("should return 200 as a status", () => {
             return request(server).get('/api/subjects')
             .then(res => {
-                console.log(res.data)
                 expect(res.status).toBe(200)
             })
         })

@@ -4,7 +4,7 @@ const db = require("../data/dbconfig.js");
 const server = require("../api/server.js");
 const knex = require("../data/dbconfig.js");
 const ActDB = require("./activities-model.js");
-const testImage = `${__dirname}/../utils/test-helpers/testPost.png`;
+const testImage = `${__dirname}/../utils/test-helpers/testPost.PNG`;
 
 describe("activities endpoints", () => {
   beforeAll(() => {
@@ -129,7 +129,7 @@ describe("activities endpoints", () => {
   describe("PUT /:id/addimg", () => {
     it("should return a 200 status", () => {
       return request(server)
-        .put("/api/users/1/profilepic")
+        .put("/api/activities/1/addimg")
         .attach("photo", testImage)
         .then((res) => {
           expect(res.status).toBe(201);
@@ -137,8 +137,8 @@ describe("activities endpoints", () => {
     });
     it("should the user info back with the image URL", () => {
       return request(server)
-        .put("/api/users/1/profilepic")
-        .attach("photo", testImage)
+        .put("/api/activities/1/addimg")
+        .send({ file: testImage })
         .then((res) => {
           expect(res.body).toBeTruthy();
         });
@@ -181,7 +181,7 @@ describe("activities endpoints", () => {
   });
 });
 
-describe("users model", () => {
+describe("activities model", () => {
   beforeAll(() => {
     return knex.seed.run();
   });

@@ -1,5 +1,9 @@
 # API Documentation
 
+![Maintainability](https://api.codeclimate.com/v1/badges/b1dbebbcb22c94494974/maintainability)
+![Test Coverage](https://api.codeclimate.com/v1/badges/b1dbebbcb22c94494974/test_coverage)
+
+
 #### Backend delpoyed at [Heroku](https://my-school-v1.herokuapp.com/) <br>
 
 ## Getting started
@@ -67,6 +71,8 @@ To get the server running locally:
 | DELETE | `/users/:id`            | TBD            | Delete a user.                                 |
 
 # Data Model
+
+![DataModel](https://i.imgur.com/0pD2oZF.png)
 
 Visual data model available [here](https://app.dbdesigner.net/designer/schema/328542)
 

@@ -4,7 +4,7 @@ const db = require('../data/dbconfig.js');
 const server = require('../api/server.js');
 const knex = require('../data/dbconfig.js');
 const UsersDB = require('./users-model.js')
-const testImage = `${__dirname}/../utils/test-helpers/testPost.png`
+const testImage = `${__dirname}/../utils/test-helpers/testPost.PNG`
 
 describe('users endpoints', ()=> {
     beforeAll(() => {
