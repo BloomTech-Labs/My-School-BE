@@ -7,7 +7,6 @@ router.post('/registration', (req, res) => {
   const user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash;
-  delete user.rememberMe;
   Users.addUser(user)
   .then((user) => {
     const token = generateToken(user);
@@ -24,6 +23,7 @@ router.post('/login', (req, res) => {
   Users.getUserBy({username})
   .then(user => {
     if(user && bcrypt.compareSync(password, user.password)){
+      delete user.rememberMe;
       const token = generateToken(user);
       res.status(202).json({user, token})
     }else{
