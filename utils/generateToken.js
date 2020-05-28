@@ -5,7 +5,7 @@ module.exports = function generateToken(user) {
       username: user.username,
     };
     const options = {
-      expiresIn: '1d',
+      expiresIn: user.rememberMe ? '30d' : '2h'
     };
     return jwt.sign(payload,  process.env.JWT_SECRET, options);
   }
