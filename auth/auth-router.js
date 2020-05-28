@@ -23,7 +23,6 @@ router.post('/login', (req, res) => {
   Users.getUserBy({username})
   .then(user => {
     if(user && bcrypt.compareSync(password, user.password)){
-      delete user.rememberMe;
       const token = generateToken(user);
       res.status(202).json({user, token})
     }else{
