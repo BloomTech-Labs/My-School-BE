@@ -21,3 +21,4 @@ exclude_patterns:
   - "**/node_modules/"
   - "data/migrations/"
   - "data/seeds/"
+  - 

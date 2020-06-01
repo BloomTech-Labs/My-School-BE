@@ -5,16 +5,20 @@ const Users = require('../users/users-model.js')
 
 router.post('/registration', (req, res) => {
   const user = req.body;
-  const hash = bcrypt.hashSync(user.password, 12);
-  user.password = hash;
-  Users.addUser(user)
-  .then((user) => {
-    const token = generateToken(user);
-    res.status(201).json({user, token})
-  })
-  .catch((err) => {
-    res.status(500).json({errorMessage: err.message})
-  })
+  if(user.username && user.password){
+    const hash = bcrypt.hashSync(user.password, 12);
+    user.password = hash;
+    Users.addUser(user)
+    .then((user) => {
+      const token = generateToken(user);
+      res.status(201).json({user, token})
+    })
+    .catch((err) => {
+      res.status(500).json({errorMessage: err.message})
+    })
+  } else{
+    res.status(400).json({errorMessage: 'Must include a username and password'})
+  }
 });
 
 // Login Endpoint
