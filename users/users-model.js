@@ -7,7 +7,8 @@ module.exports = {
   editUser,
   deleteUser,
   addUser,
-  getUserBy
+  getUserBy,
+  getUsersBy
 };
 
 function getAllUsers() {
@@ -71,4 +72,8 @@ function addUser(user) {
 
 function getUserBy(filter){
   return db('users').first().where(filter)
+}
+
+function getUsersBy(filter){
+  return db('users').where(filter)
 }

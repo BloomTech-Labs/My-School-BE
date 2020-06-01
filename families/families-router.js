@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const familiesDB = require('./families-model.js');
+const usersDb = require('../users/users-model.js')
 
 router.get('/', (req,res)=>{
     familiesDB.getAllFamilies()
@@ -16,7 +17,10 @@ router.get('/:id', (req,res)=>{
     familiesDB.getFamilyById(req.params.id)
     .then(family => {
         if(family){
-            res.status(200).json(family)
+            usersDb.getUsersBy({family_id: req.params.id})
+            .then(people => {
+                res.status(200).json({family, people})
+            })
         }
         else{
             res.status(404).json({errorMessage: 'No family with that ID'})
