@@ -70,7 +70,6 @@ router.put('/:id/addimg', (req,res)=> {
             .catch(err => res.status(500).json({message: `unexpected error in database while trying to return the activity with the id of ${id}`}))
         })
         .catch(err => {
-            console.log('LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK', err)
           res.status(500).json({message: `unexpected error with database while tryingt to add an image to the activity with the id of ${id}`})
         })
     })
@@ -99,7 +98,7 @@ function verifyId(req,res,next){
     ActivitesDB.getActivityById(id)
     .then(activity => {
         req.activity = activity;
-        activity ? next() : res.status(401).json({message: `there is no record of an activity with the id of ${id}`})
+        activity.length ? next() : res.status(401).json({message: `there is no record of an activity with the id of ${id}`})
     })
     .catch(err => res.status(500).json({message: `unexpected error in database when trying to the activity with the id of ${id}`, err: err.message}))
 };

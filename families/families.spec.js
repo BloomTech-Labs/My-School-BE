@@ -34,8 +34,8 @@ describe('families endpoint', () => {
             .then(res => {
                 expect(res.body).toEqual(
                     expect.objectContaining({
-                        id: expect.any(Number),
-                        name: expect.any(String)
+                        family: expect.any(Object),
+                        people: expect.any(Array)
                     })
                 )
             })

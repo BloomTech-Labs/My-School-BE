@@ -41,6 +41,20 @@ describe("activities endpoints", () => {
           expect(res.body).toBeTruthy();
         });
     });
+    it('should return a status of 401 if there\'s no activity with that ID', () => {
+      return request(server)
+      .get('/api/activities/100')
+      .then(res => {
+        expect(res.status).toBe(401)
+      })
+    })
+    it('should return an error message indicating the lack of an activity with the given ID', () => {
+      return request(server)
+      .get('/api/activities/100')
+      .then(res => {
+        expect(res.body.message).toBe('there is no record of an activity with the id of 100')
+      })
+    })
   });
   describe("POST /", () => {
     it("should return a status of 201 if the name is created", () => {
@@ -83,6 +97,13 @@ describe("activities endpoints", () => {
           );
         });
     });
+    it('should return a status of 401 if the activity does not include a name', () =>{
+      return request(server)
+      .post('/api/activities')
+      .then(res => {
+        expect(res.status).toBe(401)
+      })
+    })
   });
   describe("POST /attachimg", () => {
     it("should return a status of 201 if the name is created", () => {
