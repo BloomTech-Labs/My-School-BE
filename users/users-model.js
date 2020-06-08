@@ -46,10 +46,9 @@ function getAllActivitesForUser(id) {
     )
     .select(
       "activities.*",
-      // "users.name as studentsName",
-      // "subjects.name as subject",
-      // "activity_types.name as activityType"
-      "users.*"
+      "users.name as studentsName",
+      "subjects.name as subject",
+      "activity_types.name as activityType"
     )
     .where("student_id", "=", id);
 }
@@ -78,11 +77,3 @@ function getUserBy(filter){
 function getUsersBy(filter){
   return db('users').where(filter)
 }
-
-function getUsersActivitiesBy(filter){
-  return db('users').where(filter)
-  .then(user => {
-    getAllActivitesForUser(user.id)
-  })
-}
-
