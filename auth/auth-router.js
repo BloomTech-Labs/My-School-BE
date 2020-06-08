@@ -34,10 +34,11 @@ router.post('/login', (req, res) => {
           const children = []
           for(let i=0; i < family.length; i++){
             if(family[i].user_type_id === 2){
+              console.log()
               children.push(family[i])
-              res.status(202).json({user, children, token})
               }
             }
+            res.status(202).json({user, children, token})
           } )
         .catch(err => {
           res.status(500).json({errorMessage: 'Server failed to retrieve user and family'})
