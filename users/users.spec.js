@@ -54,7 +54,7 @@ describe('users endpoints', ()=> {
     })
     describe('PUT /:id', () => {
         it("should return a 200 status", () => {
-            return request(server).put('/api/users/1')
+            return request(server).put('/api/users/3')
             .send( { 
                 name: 'dylan'
             })
@@ -63,7 +63,7 @@ describe('users endpoints', ()=> {
             })
         })
         it("should return the user with updated changes", () => {
-            return request(server).get('/api/users/1')
+            return request(server).get('/api/users/3')
             .then(res => {
                 expect(res.body).toBeTruthy()
             })

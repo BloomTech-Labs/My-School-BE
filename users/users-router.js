@@ -30,8 +30,10 @@ router.get('/:id/activities', verifyId, (req,res)=>{
 
 router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
     const changes = req.body;
-    const hash = bcrypt.hashSync(changes.password, 12)
-    changes.password = hash;
+    if(changes.password){
+        const hash = bcrypt.hashSync(changes.password, 12)
+        changes.password = hash;
+    }
     UsersDB.editUser(req.user.id, changes)
     .then(number => {
         UsersDB.getUserById(req.user.id)
@@ -45,10 +47,13 @@ router.put('/:id/profilepic', verifyId, (req,res)=>{
     const { id } = req.params;
     const file = req.files.photo;
     const changes = {}
-    if(req.body){
+    if(req.body.password){
+        console.log(req.body.password)
         const hash = bcrypt.hashSync(req.body.password, 12)
         changes = req.body
         changes.password = hash
+    } else {
+        console.log(req.body)
     }
     cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
         changes.profile_picture = results.url
@@ -59,6 +64,7 @@ router.put('/:id/profilepic', verifyId, (req,res)=>{
             .catch(err => res.status(500).json({message: `unexpected error in database while trying to return the updated user with the id of ${id}`}))
         })
         .catch(err => {
+            console.log({err})
           res.status(500).json({message: `unexpected error with database while trying to add a profile picutre to the user with the id of ${id}`})
         })
     })
