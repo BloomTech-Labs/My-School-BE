@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const UsersDB = require('./users-model.js');
 const cloudinary = require('cloudinary').v2;
+const bcrypt = require('bcryptjs')
 
 cloudinary.config({
   cloud_name: process.env.NAME,
@@ -28,7 +29,9 @@ router.get('/:id/activities', verifyId, (req,res)=>{
 });
 
 router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
-    const changes = req.body; 
+    const changes = req.body;
+    const hash = bcrypt.hashSync(changes.password, 12)
+    changes.password = hash;
     UsersDB.editUser(req.user.id, changes)
     .then(number => {
         UsersDB.getUserById(req.user.id)
@@ -41,10 +44,15 @@ router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
 router.put('/:id/profilepic', verifyId, (req,res)=>{
     const { id } = req.params;
     const file = req.files.photo;
+    const changes = {}
+    if(req.body){
+        const hash = bcrypt.hashSync(req.body.password, 12)
+        changes = req.body
+        changes.password = hash
+    }
     cloudinary.uploader.upload(file.tempFilePath, (err,results)=>{
-        UsersDB.editUser(id,{
-          profile_picture: results.url,
-        })
+        changes.profile_picture = results.url
+        UsersDB.editUser(id,changes)
         .then(newImage => {
             UsersDB.getUserById(id)
             .then(updatedUser => res.status(201).json(updatedUser))
