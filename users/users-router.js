@@ -46,7 +46,7 @@ router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
 router.put('/:id/profilepic', verifyId, (req,res)=>{
     const { id } = req.params;
     const file = req.files.photo;
-    const changes = {}
+    let changes = {}
     if(req.body.password){
         const hash = bcrypt.hashSync(req.body.password, 12)
         changes = req.body
