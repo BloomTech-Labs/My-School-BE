@@ -34,7 +34,6 @@ router.post('/login', (req, res) => {
           const children = []
           for(let i=0; i < family.length; i++){
             if(family[i].user_type_id === 2){
-              console.log()
               children.push(family[i])
               }
             }
