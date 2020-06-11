@@ -30,8 +30,10 @@ router.get('/:id/activities', verifyId, (req,res)=>{
 
 router.put('/:id', verifyId, userBodyVerifaction, (req,res)=>{
     const changes = req.body;
-    const hash = bcrypt.hashSync(changes.password, 12)
-    changes.password = hash;
+    if(changes.password){
+        const hash = bcrypt.hashSync(changes.password, 12)
+        changes.password = hash;
+    }
     UsersDB.editUser(req.user.id, changes)
     .then(number => {
         UsersDB.getUserById(req.user.id)
@@ -45,7 +47,7 @@ router.put('/:id/profilepic', verifyId, (req,res)=>{
     const { id } = req.params;
     const file = req.files.photo;
     const changes = {}
-    if(req.body){
+    if(req.body.password){
         const hash = bcrypt.hashSync(req.body.password, 12)
         changes = req.body
         changes.password = hash

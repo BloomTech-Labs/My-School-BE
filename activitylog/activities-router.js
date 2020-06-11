@@ -9,8 +9,6 @@ cloudinary.config({
   api_secret: process.env.API_SECRET 
 })
 
-console.log(process.env.API_KEY)
-
 router.get('/', (req,res)=>{
     ActivitesDB.getAllActivities()
     .then(activites => res.status(200).json(activites))
