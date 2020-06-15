@@ -20,10 +20,10 @@ server.use(expressFileUpload({
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-server.use('/api/activities', activitylogRouter);
-server.use('/api/families', familiesRouter);
+server.use('/api/activities', authenticator, activitylogRouter);
+server.use('/api/families', authenticator, familiesRouter);
 server.use('/api/subjects', subjectsRouter);
-server.use('/api/users',  usersRouter);
+server.use('/api/users',  authenticator, usersRouter);
 server.use('/api/auth', authRouter)
 
 server.get("/", (req, res) => {
