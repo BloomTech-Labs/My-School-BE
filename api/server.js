@@ -14,8 +14,6 @@ server.use(expressFileUpload({
   useTempFiles: true
 }));
 
-//TO DO:
-//Add authenticator to activities, families, and users
 
 server.use(cors());
 server.use(helmet());
