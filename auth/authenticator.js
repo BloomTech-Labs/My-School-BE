@@ -8,7 +8,8 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, secret, (error, decodedToken) => {
       if (error) {
-        res.status(401).json({ message: "Bad token" });
+        res.status(401).json({ message: "Bad token" })
+        res.redirect('/login?expired=true');
       } else {
         req.decodedToken = decodedToken;
         next();
