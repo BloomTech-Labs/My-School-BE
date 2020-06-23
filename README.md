@@ -18,63 +18,70 @@ To get the server running locally:
 ### Framework : Express
 
 -    Allows for rapid implementation
--    No onboarding time concerns, all members were familiar with Express
 -    Excellent documentation and other sources available
 -    Stable, has been around for a while
 
 ## Endpoints
 
+
 #### Monitoring
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/`                     | TBD            | Returns a message indicating server is up    |
+| GET    | `/`                     | All            | Returns a message indicating server is up    |
 
 #### Activities Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/activities/`          | TBD            | Returns all activities in the database.      |
-| GET    | `/activities/:id`       | TBD            | Returns the specified activity.              |
-| POST   | `/activities/`          | TBD            | Add a new activity.                          |
-| POST   | `/activities/attachimg` | TBD            | Add a new activity with photo.               |
-| PUT    | `/activities/:id`       | TBD            | Edit an existing activity.                   |
-| PUT    | `/activities/:id/addimg`| TBD            | add a photo to anexisting activity.          |
-| DELETE | `/activities/:id`       | TBD            | Delete an activity.                          |
+| GET    | `/activities/`          | All            | Returns all activities in the database.      |
+| GET    | `/activities/:id`       | All            | Returns the specified activity.              |
+| POST   | `/activities/`          | All            | Adds a new activity.                         |
+| POST   | `/activities/attachimg` | All            | Adds a new activity with photo.              |
+| PUT    | `/activities/:id`       | All            | Edits an existing activity.                  |
+| PUT    | `/activities/:id/addimg`| All            | Adds a photo to an existing activity.        |
+| DELETE | `/activities/:id`       | All            | Deletes the specified activity.              |
 
 
 #### Subjects Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/subjects/`            | TBD            | Returns all subjects in the database.        |
-| GET    | `/subjects/:id`         | TBD            | Returns the specified subject.               |
-| POST   | `/subjects/`            | TBD            | Add a new subject.                           |
-| PUT    | `/subjects/:id`         | TBD            | Edit an existing subject.                    |
-| DELETE | `/subjects/:id`         | TBD            | Delete a subject.                            |
+| GET    | `/subjects/`            | All            | Returns all subjects in the database.        |
+| GET    | `/subjects/:id`         | All            | Returns the specified subject.               |
+| POST   | `/subjects/`            | All            | Add a new subject.                           |
+| PUT    | `/subjects/:id`         | All            | Edit an existing subject.                    |
+| DELETE | `/subjects/:id`         | All            | Delete a subject.                            |
 
 #### Families Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/families/`            | TBD            | Returns all families in the database.        |
-| GET    | `/families/:id`         | TBD            | Returns the specified family.                |
-| POST   | `/families/`            | TBD            | Add a new family.                            |
-| PUT    | `/families/:id`         | TBD            | Edit an existing family.                     |
-| DELETE | `/families/:id`         | TBD            | Delete a family.                             |
+| GET    | `/families/`            | All            | Returns all families in the database.        |
+| GET    | `/families/:id`         | All            | Returns the specified family.                |
+| POST   | `/families/`            | All            | Add a new family.                            |
+| PUT    | `/families/:id`         | All            | Edit an existing family.                     |
+| DELETE | `/families/:id`         | All            | Delete a family.                             |
 
 #### Users Routes
 
 | Method | Endpoint                | Access Control | Description                                    |
 | ------ | ----------------------- | -------------- | ---------------------------------------------- |
-| GET    | `/users/`               | TBD            | Returns all users in the database              |
-| GET    | `/users/:id`            | TBD            | Returns the specified user.                    |
-| GET    | `/users/:id/subjects`   | TBD            | Returns all subjects for the specified user.   |
-| GET    | `/users/:id/activities` | TBD            | Returns the activities for the specified user. |
-| POST   | `/users/`               | TBD            | Add a new user.                                |
-| PUT    | `/users/:id`            | TBD            | Edit an existing user.                         |
-| PUT    | `/users/:id/profilepic` | TBD            | Edit an existing user/adding a profile picture |
-| DELETE | `/users/:id`            | TBD            | Delete a user.                                 |
+| GET    | `/users/`               | All            | Returns all users in the database              |
+| GET    | `/users/:id`            | All            | Returns the specified user.                    |
+| GET    | `/users/:id/subjects`   | All            | Returns all subjects for the specified user.   |
+| GET    | `/users/:id/activities` | All            | Returns the activities for the specified user. |
+| POST   | `/users/`               | All            | Add a new user.                                |
+| PUT    | `/users/:id`            | All            | Edit an existing user.                         |
+| PUT    | `/users/:id/profilepic` | All            | Edit an existing user/adding a profile picture |
+| DELETE | `/users/:id`            | All            | Delete a user.                                 |
+
+#### Authentication Routes
+
+| Method | Endpoint           | Access Control | Description                                         |
+| ------ | ------------------ | -------------- | --------------------------------------------------- |
+| POST   | `/registration/`   | All            | Add a new user. Returns the user object and a JWT   |
+| POST   | `/login`           | All            | Returns the user object and a JWT                   |
 
 # Data Model
 
